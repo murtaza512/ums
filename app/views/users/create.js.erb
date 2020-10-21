@@ -1,4 +1,5 @@
 <% if @user.persisted? %>
+  $('#userFromModal').modal('toggle');
   $('#user-datatable').DataTable().draw();
 <% end %>
 
