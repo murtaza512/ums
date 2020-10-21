@@ -92,3 +92,11 @@ rails test
 - Used minitest along with shoulda matchers gem for test coverage
 - Used bootstrap 4 plugins for designing and responsive website
 - Used datatable plugins For the UI of data view with searching, sorting and ordsering and handle the backend manually to implement search, sort and pagination funtionality
+
+### Workflow and functionality
+
+- User can see the all the users on root page
+- User can search by name, email, status, last_updated, title using search bar above the table
+- User can switch to different pages using Page numbers buttons
+- User can sort the users being shown in the table view by clicking on the header of each column i.e. Click on `Name` will sort it in ascending order and if you click again on it, it will be sorted in descending order
+
