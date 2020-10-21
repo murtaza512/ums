@@ -1,5 +1,25 @@
 <% if @user.persisted? %>
   $('#userFromModal').modal('toggle');
   $('#user-datatable').DataTable().draw();
+  $.toast({
+    text: 'user has been created successfully',
+    icon: 'success',
+    showHideTransition: 'fade',
+    hideAfter: 3000,
+    textAlign: 'left',
+    position: 'top-right',
+  });
+
+  $('#userFromModal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+  });
 <% end %>
 
+$.toast({
+    text: 'user has been failed successfully',
+    icon: 'success',
+    showHideTransition: 'fade',
+    hideAfter: 3000,
+    textAlign: 'left',
+    position: 'top-right',
+  });

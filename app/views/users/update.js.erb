@@ -1,0 +1,21 @@
+<% if @user.errors.empty? %>
+  $('#userEditFromModal').modal('toggle');
+  $('#user-datatable').DataTable().draw();
+  $.toast({
+    text: 'user has been updated successfully',
+    icon: 'success',
+    showHideTransition: 'fade',
+    hideAfter: 3000,
+    textAlign: 'left',
+    position: 'top-right',
+  });
+<% end %>
+
+$.toast({
+  text: 'user has been failed successfully',
+  icon: 'success',
+  showHideTransition: 'fade',
+  hideAfter: 3000,
+  textAlign: 'left',
+  position: 'top-right',
+});

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_user, only: [:edit, :update, :destroy]
+
   def index
     respond_to do |format|
       format.html
@@ -11,6 +13,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.save
+  end
+
+  def edit; end
+
+  def update
+    puts user_params.inspect
+    @user.update!(user_params)
+    puts @user.inspect
+  end
+
+  def destroy
+    @user.destroy
   end
 
   private
@@ -27,7 +41,7 @@ class UsersController < ApplicationController
       {
         'iTotalRecords': User.count,
         'iTotalDisplayRecords': User.count,
-        'aaData': users.pluck(column_names)
+        'aaData': users.select(column_names + [:id])
       }
     end
 
@@ -38,5 +52,9 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :phone, :title, :status)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 end

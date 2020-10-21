@@ -1,29 +1,48 @@
 <div class='container'>
   <h1 class='bg-success text-center'>Users</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userFromModal">
-  Create User
-</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userFromModal">
+    Create User
+  </button>
 
-<div class="modal fade" id="userFromModal" tabindex="-1" role="dialog" aria-labelledby="userFromModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="userFromModalLabel">User Form</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class='row'>
-          <div class='col-md-12'>
-            <%= render 'form', user: User.new %>
+  <div class="modal fade" id="userFromModal" tabindex="-1" role="dialog" aria-labelledby="userFromModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userFromModalLabel">User Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='row'>
+            <div class='col-md-12'>
+              <%= render 'form', user: User.new %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditFromModal" hidden="true"></button>
+  <div class="modal fade" id="userEditFromModal" tabindex="-1" role="dialog" aria-labelledby="userFromModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userFromModalLabel">User Edit Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='row'>
+            <div class='col-md-12' id="user_edit_form"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <table class='table' id='user-datatable'>
     <thead class='thead-light'>
@@ -34,6 +53,7 @@
         <th scope='col'>Title</th>
         <th scope='col'>Status</th>
         <th scope='col'>Last Updated</th>
+        <th scope='col'>Edit / Delete</th>
       </tr>
     </thead>
   </table>

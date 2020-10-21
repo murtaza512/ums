@@ -9,9 +9,10 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("datatables.net-bs4")
-import 'bootstrap'
-import './src/application.scss'
-import './users.js'
+require("jquery-toast-plugin")
+import "bootstrap"
+import "./src/application.scss"
+import "./users.js"
 
 window.jQuery = $;
 window.$ = $;
