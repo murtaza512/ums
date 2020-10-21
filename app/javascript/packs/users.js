@@ -1,6 +1,13 @@
 $(document).ready(function() {
   var base_url = window.location.protocol + "//" + window.location.host + "/";
   $('#user-datatable').DataTable( {
+    "createdRow": function (row, data, index) {
+      if(data["status"] ===  "active"){
+        $('td', row).eq(4).css('color', 'green');
+      } else {
+        $('td', row).eq(4).css('color', 'red');
+      }
+    },
     processing: true,
     serverSide: true,
     ajax: base_url,
