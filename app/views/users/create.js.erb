@@ -13,13 +13,13 @@
   $('#userFromModal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
   });
-<% end %>
-
+<% else %>
 $.toast({
-    text: 'user has been failed successfully',
-    icon: 'success',
-    showHideTransition: 'fade',
-    hideAfter: 3000,
-    textAlign: 'left',
-    position: 'top-right',
-  });
+  text: 'user failed to updated',
+  icon: 'success',
+  showHideTransition: 'fade',
+  hideAfter: 3000,
+  textAlign: 'left',
+  position: 'top-right',
+});
+<% end %>

@@ -9,13 +9,13 @@
     textAlign: 'left',
     position: 'top-right',
   });
+<% else %>
+  $.toast({
+    text: 'user has been failed successfully',
+    icon: 'error',
+    showHideTransition: 'fade',
+    hideAfter: 3000,
+    textAlign: 'left',
+    position: 'top-right',
+  });
 <% end %>
-
-$.toast({
-  text: 'user has been failed successfully',
-  icon: 'success',
-  showHideTransition: 'fade',
-  hideAfter: 3000,
-  textAlign: 'left',
-  position: 'top-right',
-});
