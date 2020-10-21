@@ -18,9 +18,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    puts user_params.inspect
-    @user.update!(user_params)
-    puts @user.inspect
+    @user.update(user_params)
   end
 
   def destroy
