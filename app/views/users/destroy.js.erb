@@ -1,1 +1,10 @@
-  $('#user-datatable').DataTable().draw();
+$('#user-datatable').DataTable().draw();
+
+$.toast({
+  text: 'User has been deleted successfully',
+  icon: 'info',
+  showHideTransition: 'fade',
+  textAlign: 'left',
+  position: 'top-right',
+  hideAfter: 7000,
+});

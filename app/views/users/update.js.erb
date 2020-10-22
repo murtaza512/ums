@@ -5,16 +5,16 @@
     text: 'user has been updated successfully',
     icon: 'success',
     showHideTransition: 'fade',
-    hideAfter: 3000,
+    hideAfter: 5000,
     textAlign: 'left',
     position: 'top-right',
   });
 <% else %>
   $.toast({
-    text: 'user has been failed successfully',
+    text: '<%= @user.errors.full_messages.to_sentence %>',
     icon: 'error',
     showHideTransition: 'fade',
-    hideAfter: 3000,
+    hideAfter: 7000,
     textAlign: 'left',
     position: 'top-right',
   });

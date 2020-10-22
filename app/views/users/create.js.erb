@@ -5,7 +5,7 @@
     text: 'user has been created successfully',
     icon: 'success',
     showHideTransition: 'fade',
-    hideAfter: 3000,
+    hideAfter: 6000,
     textAlign: 'left',
     position: 'top-right',
   });
@@ -14,12 +14,12 @@
     $(this).find('form')[0].reset();
   });
 <% else %>
-$.toast({
-  text: 'user failed to updated',
-  icon: 'success',
-  showHideTransition: 'fade',
-  hideAfter: 3000,
-  textAlign: 'left',
-  position: 'top-right',
-});
+  $.toast({
+    text: '<%= @user.errors.full_messages.to_sentence %>',
+    icon: 'success',
+    showHideTransition: 'fade',
+    textAlign: 'left',
+    position: 'top-right',
+    hideAfter: 7000,
+  });
 <% end %>
