@@ -30,22 +30,29 @@ class UsersController < ApplicationController
     def user_data
       column_names = [:name, :email, :phone, :title, :status, :updated_at]
 
-      users = User.
-        limit(params[:length]).
-        offset(params[:start]).
-        search(params.dig(:search, :value))
+      search_value= params.dig(:search, :value).presence || '*'
+      users = User.search(
+        search_value,
+        limit: params[:length].to_i,
+        offset: params[:start].to_i,
+        order: order_params_formating(column_names),
+        select: column_names + [:id],
+        fields: [{ status: :exact }, :name, :email, :title]
+      )
 
-      users = users.order(order_params_formating(column_names)) if params.dig(:order).present?
       {
         'iTotalRecords': User.count,
-        'iTotalDisplayRecords': User.count,
-        'aaData': users.select(column_names + [:id])
+        'iTotalDisplayRecords': users.total_count,
+        'aaData': users
       }
     end
 
     def order_params_formating(column_names)
       sort_params = params.dig(:order)
-      params.dig(:order).keys.map { |val| [column_names[sort_params.dig(val, 'column').to_i], sort_params.dig(val, 'dir')].join(' ')}.join(', ')
+      params.dig(:order).keys.reduce({}) do |res, val|
+        res[column_names[sort_params.dig(val, 'column').to_i]] = sort_params.dig(val, 'dir')
+        res
+      end
     end
 
     def user_params
