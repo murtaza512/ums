@@ -12,8 +12,8 @@ require("datatables.net-bs4")
 require("jquery-toast-plugin")
 import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all";
-import "./src/application.scss"
-import "./users.js"
+import "./src/stylesheets/application.scss"
+import "./src/javascripts/users.js"
 
 window.jQuery = $;
 window.$ = $;
@@ -22,5 +22,5 @@ window.$ = $;
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
 //
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)

@@ -13,7 +13,7 @@ $(document).ready(function() {
     ajax: base_url,
     order: [[ 5, "desc" ], [ 0, "asc" ],[ 1, "asc" ],[ 3, "asc" ],[ 2, "asc" ], [ 4, "asc" ]],
     columns: [
-      { data: "name"},
+      { data: "name" },
       { data: "email" },
       { data: "phone" },
       { data: "title" },
