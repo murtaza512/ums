@@ -21,8 +21,9 @@ $(document).ready(function() {
       { data: "updated_at" },
       {
         data: null,
+        orderable: false,
         render: function (data, type, row) {
-          return '<a href="" id="' + row.id + '" class="remove_user">Delete</a> / <a href="" id="' + row.id + '" class="edit_user">Edit</a>'
+          return '<a href="" id="' + row.id + '" class="remove_user"><i class="fas fa-trash text-danger"></i></a> <a href="" id="' + row.id + '" class="edit_user"><i class="fas fa-edit text-info"></i></a>'
         }
       }
     ]

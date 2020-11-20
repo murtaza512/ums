@@ -11,6 +11,7 @@ require("channels")
 require("datatables.net-bs4")
 require("jquery-toast-plugin")
 import "bootstrap"
+import "@fortawesome/fontawesome-free/js/all";
 import "./src/application.scss"
 import "./users.js"
 
