@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: %i(edit update destroy)
 
   def index
     respond_to do |format|
@@ -27,39 +27,40 @@ class UsersController < ApplicationController
 
   private
 
-    def user_data
-      column_names = [:name, :email, :phone, :title, :status, :updated_at]
+  def user_data
+    {
+      'iTotalRecords': User.count,
+      'iTotalDisplayRecords': filtered_users.total_count,
+      'aaData': filtered_users
+    }
+  end
 
-      search_value= params.dig(:search, :value).presence || '*'
-      users = User.search(
-        search_value,
-        limit: params[:length].to_i,
-        offset: params[:start].to_i,
-        order: order_params_formating(column_names),
-        select: column_names + [:id],
-        fields: [{ status: :exact }, :name, :email, :title]
-      )
+  def filtered_users
+    column_names = %i(name email phone title status updated_at)
 
-      {
-        'iTotalRecords': User.count,
-        'iTotalDisplayRecords': users.total_count,
-        'aaData': users
-      }
+    search_value = params.dig(:search, :value).presence || '*'
+    @users ||= User.search(
+      search_value,
+      limit: params[:length].to_i,
+      offset: params[:start].to_i,
+      order: order_params_formating(column_names),
+      select: column_names + [:id],
+      fields: [{ status: :exact }, :name, :email, :title]
+    )
+  end
+
+  def order_params_formating(column_names)
+    sort_params = params.dig(:order)
+    params.dig(:order).keys.each_with_object({}) do |val, res|
+      res[column_names[sort_params.dig(val, 'column').to_i]] = sort_params.dig(val, 'dir')
     end
+  end
 
-    def order_params_formating(column_names)
-      sort_params = params.dig(:order)
-      params.dig(:order).keys.reduce({}) do |res, val|
-        res[column_names[sort_params.dig(val, 'column').to_i]] = sort_params.dig(val, 'dir')
-        res
-      end
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :phone, :title, :status)
+  end
 
-    def user_params
-      params.require(:user).permit(:name, :email, :phone, :title, :status)
-    end
-
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

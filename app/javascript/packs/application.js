@@ -12,8 +12,8 @@ require("datatables.net-bs4")
 require("jquery-toast-plugin")
 import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all";
-import "./src/stylesheets/application.scss"
-import "./src/javascripts/users.js"
+import "./src/stylesheets/application"
+import "./src/javascripts/users"
 
 window.jQuery = $;
 window.$ = $;
