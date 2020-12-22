@@ -86,6 +86,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  bind "unix:///var/run/puma/my_app.sock"
+  pidfile "/var/run/puma/my_app.sock"
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
