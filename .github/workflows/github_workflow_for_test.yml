@@ -14,17 +14,18 @@ on:
   pull_request:
     branches: [ main ]
 
+# defined the All ENV variable which will be used in the this workflow jobs
+env:
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_USER: postgres
+  RAILS_ENV: test
+
 jobs:
   test: # it's name of jobs
 
     runs-on: ubuntu-latest # Need to specify os. It's required for each job
-   # defined the All ENV variable which will be used in the this workflow jobs
-    env:
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      RAILS_ENV: test
 
     steps:
       - uses: actions/checkout@v2
@@ -47,11 +48,11 @@ jobs:
         with:
           elasticsearch-version: 6
 
-          # Be default postgresql, only password is required for this image. these are default value for others
-          # POSTGRES_HOST: localhost
-          # POSTGRES_PORT: 5432
-          # POSTGRES_PASSWORD: postgres
-          # POSTGRES_USER: postgres
+      # Be default postgresql, only password is required for this image. these are default value for others
+      # POSTGRES_HOST: localhost
+      # POSTGRES_PORT: 5432
+      # POSTGRES_PASSWORD: postgres
+      # POSTGRES_USER: postgres
       - uses: harmon758/postgresql-action@v1 # here used the existing github acitons of someone to intall postgresql,
         with:
           postgresql version: 11  # See https://hub.docker.com/_/postgres for available versions
