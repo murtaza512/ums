@@ -1,0 +1,64 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: RubyTestCI
+
+# these are triggers of these worfkow jobs then when it will be run and on which branch it will be run
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test: # it's name of jobs
+
+    runs-on: ubuntu-latest # Need to specify os. It's required for each job
+   # defined the All ENV variable which will be used in the this workflow jobs
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      RAILS_ENV: test
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a  # here used the existing github acitons of someone to intall ruby
+        # with:
+          # ruby-version: 2.5.3
+          # bundler-cache: true
+
+      - name: Install bundler
+        run: gem install bundler:2.1.4
+
+      - name: Install dependencies
+        run: bundle install
+
+      - uses: ankane/setup-elasticsearch@v1 # # here used the existing github acitons of someone to intall elasticsearch as it's being used
+        with:
+          elasticsearch-version: 6
+
+          # Be default postgresql, only password is required for this image. these are default value for others
+          # POSTGRES_HOST: localhost
+          # POSTGRES_PORT: 5432
+          # POSTGRES_PASSWORD: postgres
+          # POSTGRES_USER: postgres
+      - uses: harmon758/postgresql-action@v1 # here used the existing github acitons of someone to intall postgresql,
+        with:
+          postgresql version: 11  # See https://hub.docker.com/_/postgres for available versions
+          postgresql password: postgres
+
+      - name: Setup Database
+        run: bundle exec rails db:setup
+
+      - name: Run tests
+        run: bundle exec rake test

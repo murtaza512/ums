@@ -1,15 +1,23 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    Searchkick.enable_callbacks
+  end
+
+  def teardown
+    Searchkick.disable_callbacks
+  end
+
   test "should get index" do
     get users_url
     assert_response :success
   end
 
-  test "should get index ajax" do
-    get users_url, xhr: true
-    assert_response :success
-  end
+  # test "should get index ajax" do
+  #   get users_url, xhr: true
+  #   assert_response :success
+  # end
 
   test "should get create" do
     params = {

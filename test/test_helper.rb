@@ -18,3 +18,9 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+# reindex models
+User.reindex
+
+# and disable callbacks
+Searchkick.disable_callbacks
