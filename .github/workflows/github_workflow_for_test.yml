@@ -70,7 +70,7 @@ jobs:
       - name: Setup Database
         run: bundle exec rails db:setup
 
-      - name: restore lerna
+      - name: Cache node
         uses: actions/cache@v2
         with:
           path: |
@@ -82,6 +82,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
+      - name: Cache yarn with node
       - uses: actions/cache@v2
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
