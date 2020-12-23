@@ -60,5 +60,15 @@ jobs:
       - name: Setup Database
         run: bundle exec rails db:setup
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 11.4.0
+
+      - name: Install packages using yarn
+        run: yarn install
+
+      - name: Compile webpacker assets
+        run: bundle exec rails webpacker:compile
+
       - name: Run tests
         run: bundle exec rake test
