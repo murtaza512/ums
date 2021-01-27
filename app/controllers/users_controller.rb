@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
+    NotifyUserJob.perform_async if @user.save
   end
 
   def edit; end
