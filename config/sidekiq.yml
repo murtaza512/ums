@@ -3,6 +3,8 @@
 :verbose: false
 :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 10 %>
 :timeout: 20
+:pidfile: tmp/pids/sidekiq.pid
+:logfile: log/sidekiq.log
 
 # Sidekiq will run this file through ERB when reading it so you can
 # even put in dynamic logic, like a host-specific queue.
