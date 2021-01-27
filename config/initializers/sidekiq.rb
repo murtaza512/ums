@@ -1,5 +1,8 @@
 # config/initializers/sidekiq.rb
 require 'sidekiq-scheduler'
+require 'sidekiq/web'
+
+Sidekiq::Web.set :session_secret, Rails.application.secret_key_base
 
 Sidekiq.configure_server do |config|
   config.redis = { url: ENV['REDIS_URL'] || 'redis://localhost:6379/0' }
