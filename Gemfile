@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'faker', '~> 2.14'
 gem 'activerecord-import', '~> 1.0', '>= 1.0.7'
 gem 'searchkick'
+gem 'sidekiq', '~> 6.1', '>= 6.1.3'
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
