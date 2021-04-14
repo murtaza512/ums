@@ -1,85 +1,22 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
-# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+name: Test
 
-name: Ruby
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-env:
-  POSTGRES_HOST: localhost
-  POSTGRES_PORT: 5432
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_USER: postgres
-  RAILS_ENV: test
+on: [push, pull_request]
 
 jobs:
+
   test:
-
     runs-on: ubuntu-latest
-    # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
-
+    strategy:
+      fail-fast: false
+      matrix: 
+        run: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     steps:
+
       - uses: actions/checkout@v2
-      - name: Set up Ruby
-      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-      # change this to (see https://github.com/ruby/setup-ruby#versioning):
-      # uses: ruby/setup-ruby@v1
-        uses: ruby/setup-ruby@21351ecc0a7c196081abca5dc55b08f085efe09a
-        with:
-          ruby-version: 2.5.3
-      - name: Install library for postgres
-        run: sudo apt-get install libpq-dev
 
-      - name: Install bundler
-        run: gem install bundler:2.1.4
 
-      - name: Install dependencies
-        run: bundle install
+      - name: chmod
+        run: chmod +x xxx
 
-      - uses: ankane/setup-elasticsearch@v1
-        with:
-          elasticsearch-version: 6
-
-      - name: 'Run postgres sevices'
-        run: sudo service postgresql start
-
-      - name: Setup Database
-        run: bundle exec rails db:setup
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 11.4.0
-
-      - name: Install packages using yarn
-        run: yarn install
-
-      - name: Compile webpacker assets
-        run: bundle exec rails webpacker:compile
-
-      - name: Run tests
-        run: bundle exec rake test
+      - name: run
+        run: ./xxx
