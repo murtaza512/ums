@@ -22,7 +22,6 @@ env:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     # Service containers to run with `runner-job`
     services:
