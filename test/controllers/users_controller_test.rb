@@ -4,7 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     Searchkick.enable_callbacks
 
-    @params =  {
+    @params = {
       user: {
         name: Faker::Name.unique.name, email: Faker::Internet.email, phone: Faker::PhoneNumber.cell_phone, title: Faker::Lorem.word, status: 'inactive'
       }
