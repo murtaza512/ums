@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     column_names = %i(name email phone title status updated_at)
 
     search_value = params.dig(:search, :value).presence || '*'
-    @users ||= User.search(
+    @filtered_users ||= User.search(
       search_value,
       limit: params[:length].to_i,
       offset: params[:start].to_i,
@@ -50,8 +50,8 @@ class UsersController < ApplicationController
   end
 
   def order_params_formating(column_names)
-    sort_params = params.dig(:order)
-    params.dig(:order).keys.each_with_object({}) do |val, res|
+    sort_params = params[:order]
+    params[:order].keys.each_with_object({}) do |val, res|
       res[column_names[sort_params.dig(val, 'column').to_i]] = sort_params.dig(val, 'dir')
     end
   end
