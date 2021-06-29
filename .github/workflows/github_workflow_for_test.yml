@@ -101,5 +101,10 @@ jobs:
       - name: Compile webpacker assets
         run: bundle exec rails webpacker:compile
 
+      - uses: shogo82148/actions-setup-redis@v1
+        with:
+          redis-version: '6.x'
+      - run: redis-cli ping
+
       - name: Run tests
         run: bundle exec rake test
