@@ -55,5 +55,4 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal user.reload.name, 'changed name'
     assert_equal user.status, 'inactive'
   end
-
 end

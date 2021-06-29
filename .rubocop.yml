@@ -7,11 +7,19 @@ inherit_gem:
 AllCops:
   Exclude:
     - db/schema.rb
+    - bin/*
+    - 'node_modules/**/*'
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Layout/ParameterAlignment:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/ConditionalAssignment:
